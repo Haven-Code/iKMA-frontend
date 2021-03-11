@@ -1,29 +1,87 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+/** @format */
 
-Vue.use(VueRouter)
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+	{
+		path: '/',
+		component: Home,
+		meta: {
+			requiresAuth: true,
+		},
+		children: [
+			{
+				name: 'Home',
+				path: '',
+				component: () => import(/* webpackChunkName: "schedule" */ '../views/Dashboard/Calendar.vue'),
+			},
+			{
+				name: 'Sync',
+				path: '/sync',
+				component: () => import(/* webpackChunkName: "sync" */ '../views/Dashboard/Sync.vue'),
+			},
+			{
+				name: 'Ics',
+				path: '/ics',
+				component: () => import(/* webpackChunkName: "ics" */ '../views/Dashboard/Ics.vue'),
+			},
+			{
+				name: 'Scores',
+				path: '/scores',
+				component: () => import(/* webpackChunkName: "scores" */ '../views/Dashboard/Scores.vue'),
+			},
+			{
+				name: 'PWA',
+				path: '/pwa',
+				component: () => import(/* webpackChunkName: "pwa" */ '../views/Dashboard/PWA.vue'),
+			},
+			// {
+			// 	name: 'Profile',
+			// 	path: '/profile',
+			// 	component: () => import(/* webpackChunkName: "sync" */ '../views/Dashboard/Sync.vue'),
+			// },
+			{
+				name: 'Donate',
+				path: '/donate',
+				component: () => import(/* webpackChunkName: "donate" */ '../views/Dashboard/Donate.vue'),
+			},
+		],
+	},
+	{
+		path: '/auth',
+		name: 'Auth',
+		component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
+	},
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes,
+});
 
-export default router
+// router.beforeEach((to, from, next) => {
+// 	const user = store.state.user.isLogined;
+
+// 	if (to.matched.some((record) => record.meta.requiresAuth)) {
+// 		if (!user) {
+// 			next({ name: 'Login' });
+// 		} else {
+// 			next();
+// 		}
+// 	} else if (to.path == '/') {
+// 		if (!user) {
+// 			next();
+// 		} else {
+// 			next({ name: 'Dashboard' });
+// 		}
+// 	} else {
+// 		next();
+// 	}
+// });
+
+export default router;

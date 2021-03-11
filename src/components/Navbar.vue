@@ -6,11 +6,11 @@
 
 		<v-spacer class="hidden-md-and-up"></v-spacer>
 
-		<v-toolbar-title>Thời Khoá Biểu</v-toolbar-title>
-
-		<div class="hidden-sm-and-down ppx-ml-20">
+		<div class="hidden-sm-and-down ppx-ml-52">
 			<slot name="left"></slot>
 		</div>
+
+		<v-toolbar-title><slot name="title"></slot></v-toolbar-title>
 
 		<v-spacer></v-spacer>
 

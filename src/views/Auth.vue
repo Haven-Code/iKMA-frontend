@@ -18,7 +18,7 @@
 
 						<a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/LostPassword.aspx" target="_blank"><p class="text-subtitle-2 mt-n4 mr-2 text-right font-weight-light">Quên Mật Khẩu ?</p></a>
 
-						<v-btn :disabled="!form.valid" class="ppx-rounded-lg ppx-h-11 mt-6" color="purple" dark block @click="validate">
+						<v-btn class="ppx-rounded-lg ppx-h-11 mt-6" color="purple" dark block @click="login">
 							<i class="fas fa-sign-in-alt mr-2 fa-lg"></i>
 							<span class="text-body-1">Đăng Nhập</span>
 						</v-btn>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	name: 'Auth',
 	data: () => ({
@@ -43,6 +45,26 @@ export default {
 			password: null,
 		},
 	}),
+	computed: {
+		...mapState(['user']),
+	},
+	methods: {
+		toggleDarkMode() {
+			this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+			this.$store.dispatch('toggleDarkMode', this.$vuetify.theme.dark);
+		},
+		login() {
+			if (this.$refs.form.validate()) {
+				console.log('PK');
+			} else {
+				this.$toast.open({
+					message: 'Thiếu Gì Rùi!',
+					type: 'error',
+					position: 'top-right'
+				});
+			}
+		},
+	},
 };
 </script>
 

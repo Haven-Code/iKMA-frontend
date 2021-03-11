@@ -9,20 +9,22 @@
 						Hôm Nay
 					</v-btn>
 
-					<v-btn fab text small @click="prev">
+					<v-btn fab icon small @click="prev">
 						<v-icon small>
 							mdi-chevron-left
 						</v-icon>
 					</v-btn>
 
-					<v-btn fab text small @click="next">
+					<v-btn fab icon small @click="next">
 						<v-icon small>
 							mdi-chevron-right
 						</v-icon>
 					</v-btn>
-
-					<!-- {{ $refs.calendar.title }} -->
 				</div>
+			</template>
+
+			<template v-slot:title v-if="$refs.calendar">
+				{{ ($refs.calendar.title) }}
 			</template>
 		</navbar>
 
@@ -80,7 +82,29 @@ export default {
 		next() {
 			this.$refs.calendar.next();
 		},
+		translateMonth(str) {
+			let a = str.split(' ');
+			const dic = {
+				January: 'Tháng Một',
+				February: 'Tháng Hai',
+				March: 'Tháng Ba',
+				April: 'Thánng Bốn',
+				May: 'Tháng Năm',
+				June: 'Tháng Sáu',
+				July: 'Tháng Bảy',
+				August: 'Tháng Tám',
+				September: 'Tháng Chín',
+				October: 'Tháng Mười',
+				November: 'Tháng Mười Một',
+				December: 'Tháng Mười Hai',
+			};
+			let text = dic[a[0]] + ' ' + a[1];
+			return text;
+		},
 	},
+	mounted(){
+		this.setToday()
+	}
 };
 </script>
 

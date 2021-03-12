@@ -24,7 +24,7 @@
 			</template>
 
 			<template v-slot:title v-if="$refs.calendar">
-				{{ ($refs.calendar.title) }}
+				{{ translateMonth($refs.calendar.title) }}
 			</template>
 		</navbar>
 
@@ -101,6 +101,9 @@ export default {
 			let text = dic[a[0]] + ' ' + a[1];
 			return text;
 		},
+		addEvent(){
+			
+		}
 	},
 	mounted(){
 		this.setToday()

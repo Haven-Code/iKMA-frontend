@@ -102,9 +102,9 @@
 
 					<v-list-item-content>
 						<v-list-item-title class="ppx-text-lg ppx-font-medium">
-							Đặng Hoàng Phúc
+							{{ user.userInfo.displayName }}
 						</v-list-item-title>
-						<v-list-item-subtitle class="ppx-text-sm ppx-font-normal">AT160340</v-list-item-subtitle>
+						<v-list-item-subtitle class="ppx-text-sm ppx-font-normal">{{ user.userInfo.studentCode }}</v-list-item-subtitle>
 					</v-list-item-content>
 				</v-list-item>
 
@@ -145,7 +145,7 @@ import { mapState } from 'vuex';
 export default {
 	name: 'Sidebar',
 	computed: {
-		...mapState(['config']),
+		...mapState(['config','user']),
 		darkMode() {
 			return this.$vuetify.theme.dark;
 		},

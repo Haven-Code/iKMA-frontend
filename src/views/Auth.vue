@@ -3,7 +3,7 @@
 <template>
 	<v-container fluid class="fill-height grey lighten-4">
 		<v-row align="center" justify="center">
-			<v-col cols="11" md="6" lg="4">
+			<v-col cols="11" md="7" lg="5">
 				<v-card min-height="40vh" class="py-5 px-11 ppx-rounded-xl ppx-shadow-xl">
 					<p class="mt-2 text-center text-h5 font-weight-light">Đăng Nhập Bằng Tài Khoản <strong>ACTVN</strong></p>
 
@@ -12,13 +12,13 @@
 					</center>
 
 					<v-form ref="form" v-model="form.valid" lazy-validation class="mt-7">
-						<v-text-field class="ppx-rounded-lg" v-model="form.studentCode" :rules="form.rules.studentCode" label="Mã Sinh Viên" outlined dense prepend-inner-icon="fas fa-user" required></v-text-field>
+						<v-text-field :disabled="form.loading" v-on:keyup.enter="login()"  class="ppx-rounded-lg" v-model="form.studentCode" :rules="form.rules.studentCode" label="Mã Sinh Viên" outlined dense prepend-inner-icon="fas fa-user" required></v-text-field>
 
-						<v-text-field class="ppx-rounded-lg mt-n3" v-model="form.password" :rules="form.rules.password" label="Mật Khẩu" outlined dense prepend-inner-icon="fas fa-key" required></v-text-field>
+						<v-text-field :disabled="form.loading" v-on:keyup.enter="login()"  class="ppx-rounded-lg mt-n3" v-model="form.password" type="password" :rules="form.rules.password" label="Mật Khẩu" outlined dense prepend-inner-icon="fas fa-key" required></v-text-field>
 
 						<a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/LostPassword.aspx" target="_blank"><p class="text-subtitle-2 mt-n4 mr-2 text-right font-weight-light">Quên Mật Khẩu ?</p></a>
 
-						<v-btn class="ppx-rounded-lg ppx-h-11 mt-6" color="purple" dark block @click="login">
+						<v-btn class="ppx-rounded-lg ppx-h-11 mt-6" :loading="form.loading" color="purple" dark block @click="login">
 							<i class="fas fa-sign-in-alt mr-2 fa-lg"></i>
 							<span class="text-body-1">Đăng Nhập</span>
 						</v-btn>
@@ -31,6 +31,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import axios from 'axios';
 
 export default {
 	name: 'Auth',
@@ -43,6 +44,7 @@ export default {
 			},
 			studentCode: null,
 			password: null,
+			loading: false,
 		},
 	}),
 	computed: {
@@ -54,14 +56,56 @@ export default {
 			this.$store.dispatch('toggleDarkMode', this.$vuetify.theme.dark);
 		},
 		login() {
+			this.form.loading = true
+
 			if (this.$refs.form.validate()) {
-				console.log('PK');
+				const param = {
+					username: this.form.studentCode,
+					password: this.form.password,
+				};
+
+				const header = {
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				};
+
+				axios
+					.post(process.env.VUE_APP_API_URL, param, header)
+					.then((res) => {
+						const { code, data } = res.data;
+
+						if (code == 403 || !data) {
+							return this.$toast.error('<strong>Lỗi</strong>: Sai tài khoản hoặc mật khẩu!');
+						} else if (code == 401) {
+							return this.$toast.error('<strong>Lỗi</strong>: Website trường lỗi! Thử lại sau ít phút!');
+						}
+
+						// const { studentInfo, studentSchedule } = data;
+
+						// console.log(studentInfo);
+						// console.log(studentSchedule);
+
+						this.$store.dispatch('login', data);
+
+						this.$toast.success('Đăng Nhập Thành Công');
+
+						setTimeout(() => {
+							this.$router.push({
+								name: 'Home',
+							});
+						}, 1000);
+					})
+					.catch((err) => {
+						this.form.loading = false
+
+						this.$toast.error('<strong>Lỗi</strong>: ' + err);
+
+						throw new Error(err);
+					});
 			} else {
-				this.$toast.open({
-					message: 'Thiếu Gì Rùi!',
-					type: 'error',
-					position: 'top-right'
-				});
+				this.$toast.error('Thiếu Gì Rùi!');
+				this.form.loading = false
 			}
 		},
 	},

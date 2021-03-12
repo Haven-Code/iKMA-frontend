@@ -8,14 +8,14 @@ export default {
 		userSchedule: {},
 	},
 	mutations: {
-		SET_USER: (state, payload) => {
-			state.userData = payload.studentInfo;
-			state.userSchedule = payload.schedule;
+		SET_USER: (state, { studentInfo, studentSchedule }) => {
+			state.userInfo = studentInfo;
+			state.userSchedule = studentSchedule;
 			state.isLogined = true;
 		},
 		SET_LOGOUT: (state) => {
 			console.log('LOGOUT');
-			state.userData = null;
+			state.userInfo = null;
 			state.userSchedule = null;
 			state.isLogined = false;
 		},

@@ -19,7 +19,7 @@
 			<v-icon v-else>fas fa-moon</v-icon>
 		</v-btn>
 
-		<v-btn icon class="mr-1">
+		<v-btn icon class="mr-1" @click.stop="logout()">
 			<v-icon>fas fa-sign-out-alt</v-icon>
 		</v-btn>
 	</v-app-bar>
@@ -43,6 +43,12 @@ export default {
 		toggleDarkMode() {
 			this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
 			this.$store.dispatch('toggleDarkMode', this.$vuetify.theme.dark);
+		},
+		logout() {
+			this.$store.dispatch('logout');
+			this.$router.push({
+				name: 'Auth',
+			});
 		},
 	},
 	created() {

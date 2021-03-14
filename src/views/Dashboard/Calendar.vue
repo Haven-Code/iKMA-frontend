@@ -30,32 +30,51 @@
 
 		<v-container fill-height fluid class="pa-0">
 			<v-flex fill-height>
-				<v-calendar ref="calendar" v-model="webViewCalendar.focus" :events="webViewCalendar.events" color="primary" class="ppx-border-0"></v-calendar>
-				<!-- <v-menu v-model="selectedOpen" :close-on-content-click="false" offset-x>
-				<v-card color="grey lighten-4" min-width="350px" flat>
-					<v-toolbar :color="selectedEvent.color" dark>
-						<v-btn icon>
-							<v-icon>mdi-pencil</v-icon>
-						</v-btn>
-						<v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-						<v-spacer></v-spacer>
-						<v-btn icon>
-							<v-icon>mdi-heart</v-icon>
-						</v-btn>
-						<v-btn icon>
-							<v-icon>mdi-dots-vertical</v-icon>
-						</v-btn>
-					</v-toolbar>
-					<v-card-text>
-						<span v-html="selectedEvent.details"></span>
-					</v-card-text>
-					<v-card-actions>
-						<v-btn text color="secondary" @click="selectedOpen = false">
-							Cancel
-						</v-btn>
-					</v-card-actions>
-				</v-card>
-			</v-menu> -->
+				<v-calendar ref="calendar" v-model="webViewCalendar.focus" @click:event="showEvent" @click:more="viewDay" :events="webViewCalendar.events" color="primary" class="ppx-border-0"></v-calendar>
+
+				<v-menu v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
+					<v-card color="grey darken-2" style="opacity: 0.95" min-width="40vw" flat>
+						<v-toolbar dark color="primary">
+							<v-toolbar-title v-html="webViewCalendar.selectedEvent.name"></v-toolbar-title>
+							<v-spacer></v-spacer>
+						</v-toolbar>
+
+						<v-card-text class="pb-0 ppx-text-white">
+							<!-- <span v-html="webViewCalendar.selectedEvent.details"></span> -->
+							<p>
+								Môn:
+								<strong>{{ webViewCalendar.selectedEvent.eventData.subjectName }} ({{ webViewCalendar.selectedEvent.eventData.subjectCode }})</strong>
+							</p>
+
+							<p>
+								Lớp:
+								<strong>{{webViewCalendar.selectedEvent.eventData.className}}</strong>
+							</p>
+
+							<p>
+								Tiết:
+								<strong>{{ webViewCalendar.selectedEvent.eventData.lesson }}</strong>
+							</p>
+
+							<p>
+								Phòng Học:
+								<strong>{{ webViewCalendar.selectedEvent.eventData.room }}</strong>
+							</p>
+
+							<p>
+								Giáo Viên:
+								<strong>{{ webViewCalendar.selectedEvent.eventData.teacher }}</strong>
+							</p>
+						</v-card-text>
+
+						<v-card-actions class="pb-2 pr-2">
+							<v-spacer></v-spacer>
+							<v-btn large text @click="webViewCalendar.selectedOpen = false" class="ppx-text-white">
+								Đóng
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-menu>
 			</v-flex>
 		</v-container>
 	</v-main>
@@ -79,6 +98,9 @@
 			webViewCalendar: {
 				events: [],
 				focus: '',
+				selectedEvent: {},
+				selectedElement: null,
+				selectedOpen: false,
 			},
 		}),
 		computed: {
@@ -93,6 +115,24 @@
 			},
 			next() {
 				this.$refs.calendar.next()
+			},
+			showEvent({ nativeEvent, event }) {
+				const open = () => {
+					this.webViewCalendar.selectedEvent = event
+					this.webViewCalendar.selectedElement = nativeEvent.target
+					setTimeout(() => {
+						this.webViewCalendar.selectedOpen = true
+					}, 10)
+				}
+
+				if (this.webViewCalendar.selectedOpen) {
+					this.webViewCalendar.selectedOpen = false
+					setTimeout(open, 10)
+				} else {
+					open()
+				}
+
+				nativeEvent.stopPropagation()
 			},
 			translateMonth(str) {
 				let a = str.split(' ')
@@ -185,6 +225,7 @@
 
 					return {
 						name: x.subjectName,
+						eventData: x,
 						start: start,
 						end: end,
 						color: 'blue lighten-1',

@@ -32,7 +32,7 @@
 			<v-flex fill-height>
 				<v-calendar ref="calendar" v-model="webViewCalendar.focus" @click:event="showEvent" @click:more="viewDay" :events="webViewCalendar.events" color="primary" class="ppx-border-0"></v-calendar>
 
-				<v-menu v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
+				<v-menu v-if="webViewCalendar.selectedOpen" v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
 					<v-card color="grey darken-2" style="opacity: 0.95" min-width="40vw" flat>
 						<v-toolbar dark color="primary">
 							<v-toolbar-title v-html="webViewCalendar.selectedEvent.name"></v-toolbar-title>
@@ -40,28 +40,27 @@
 						</v-toolbar>
 
 						<v-card-text class="pb-0 ppx-text-white">
-							<!-- <span v-html="webViewCalendar.selectedEvent.details"></span> -->
-							<p>
+							<p class="pa-0 ma-0 mb-1">
 								Môn:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.subjectName }} ({{ webViewCalendar.selectedEvent.eventData.subjectCode }})</strong>
 							</p>
 
-							<p>
+							<p class="pa-0 ma-0 mb-1">
 								Lớp:
-								<strong>{{webViewCalendar.selectedEvent.eventData.className}}</strong>
+								<strong>{{ webViewCalendar.selectedEvent.eventData.className }}</strong>
 							</p>
 
-							<p>
+							<p class="pa-0 ma-0 mb-1">
 								Tiết:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.lesson }}</strong>
 							</p>
 
-							<p>
+							<p class="pa-0 ma-0 mb-1">
 								Phòng Học:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.room }}</strong>
 							</p>
 
-							<p>
+							<p class="pa-0 ma-0 mb-1">
 								Giáo Viên:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.teacher }}</strong>
 							</p>
@@ -94,6 +93,10 @@
 		components: {
 			Navbar,
 		},
+		metaInfo: {
+			title: 'Thời Khoá Biểu',
+			titleTemplate: ' %s | KMA Schedule',
+		},
 		data: () => ({
 			webViewCalendar: {
 				events: [],
@@ -101,6 +104,7 @@
 				selectedEvent: {},
 				selectedElement: null,
 				selectedOpen: false,
+				type: '',
 			},
 		}),
 		computed: {
@@ -109,6 +113,9 @@
 		methods: {
 			setToday() {
 				this.webViewCalendar.focus = ''
+			},
+			viewDay() {
+				this.webViewCalendar.type = 'day'
 			},
 			prev() {
 				this.$refs.calendar.prev()

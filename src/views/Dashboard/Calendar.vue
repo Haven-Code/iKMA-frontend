@@ -96,6 +96,7 @@
 	import 'dayjs/locale/vi'
 	dayjs.locale('vi')
 
+<<<<<<< Updated upstream
 	export default {
 		name: 'Calendar',
 		components: {
@@ -222,12 +223,92 @@
 					end: '',
 				}
 				if (lessonTime.start == '' || lessonTime.end == '') {
+=======
+export default {
+	name: 'Calendar',
+	components: {
+		Navbar,
+	},
+	data: () => ({
+		webViewCalendar: {
+			events: [],
+			focus: '',
+			selectedEvent: {},
+			selectedElement: null,
+			selectedOpen: false,
+			type: '',
+		},
+	}),
+	metaInfo: {
+		title: 'Thời Khoá Biểu',
+		titleTemplate: ' %s | KMA Schedule',
+	},
+	computed: {
+		...mapState(['user']),
+	},
+	methods: {
+		setToday() {
+			this.webViewCalendar.focus = '';
+		},
+		viewDay() {
+			this.webViewCalendar.type = 'day';
+		},
+		prev() {
+			this.$refs.calendar.prev();
+		},
+		next() {
+			this.$refs.calendar.next();
+		},
+		showEvent({ nativeEvent, event }) {
+			const open = () => {
+				this.webViewCalendar.selectedEvent = event;
+				this.webViewCalendar.selectedElement = nativeEvent.target;
+				setTimeout(() => {
+					this.webViewCalendar.selectedOpen = true;
+				}, 10);
+			};
+			if (this.webViewCalendar.selectedOpen) {
+				this.webViewCalendar.selectedOpen = false;
+				setTimeout(open, 10);
+			} else {
+				open();
+			}
+			nativeEvent.stopPropagation();
+		},
+		translateMonth(str) {
+			let a = str.split(' ');
+			const dic = {
+				January: 'Tháng Một',
+				February: 'Tháng Hai',
+				March: 'Tháng Ba',
+				April: 'Thánng Bốn',
+				May: 'Tháng Năm',
+				June: 'Tháng Sáu',
+				July: 'Tháng Bảy',
+				August: 'Tháng Tám',
+				September: 'Tháng Chín',
+				October: 'Tháng Mười',
+				November: 'Tháng Mười Một',
+				December: 'Tháng Mười Hai',
+			};
+			let text = dic[a[0]] + ' ' + a[1];
+			return text;
+		},
+		convertLessonsToTime(lessons) {
+			let time = {
+				start: '',
+				end: '',
+			};
+			switch (lessons) {
+				case '1,2,3':
+>>>>>>> Stashed changes
 					time = {
 						start: dayjs(day, 'DD/MM/YYYY').format('YYYY-MM-DD'),
 						end: dayjs(day, 'DD/MM/YYYY').format('YYYY-MM-DD'),
 					}
 				} else {
 					time = {
+<<<<<<< Updated upstream
 						start: dayjs((day + ' ' + lessonTime.start).trim(), 'DD/MM/YYYY H:mm').format('YYYY-MM-DD HH:mm'),
 						end: dayjs((day + ' ' + lessonTime.end).trim(), 'DD/MM/YYYY H:mm').format('YYYY-MM-DD HH:mm'),
 					}
@@ -253,6 +334,46 @@
 		mounted() {
 			this.setToday()
 			this.addEvent()
+=======
+						start: '12:30',
+						end: '15:50',
+					};
+					break;
+			}
+			return time;
+		},
+		convertDayTime(day, lesson) {
+			let lessonTime = this.convertLessonsToTime(lesson);
+			let time = {
+				start: '',
+				end: '',
+			};
+			if (lessonTime.start == '' || lessonTime.end == '') {
+				time = {
+					start: dayjs(day, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+					end: dayjs(day, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+				};
+			} else {
+				time = {
+					start: dayjs((day + ' ' + lessonTime.start).trim(), 'DD/MM/YYYY H:mm').format('YYYY-MM-DD HH:mm'),
+					end: dayjs((day + ' ' + lessonTime.end).trim(), 'DD/MM/YYYY H:mm').format('YYYY-MM-DD HH:mm'),
+				};
+			}
+			return time;
+		},
+		addEvent() {
+			const { userSchedule } = this.user;
+			this.webViewCalendar.events = userSchedule.map((x) => {
+				const { start, end } = this.convertDayTime(x.day, x.lesson);
+				return {
+					name: x.subjectName,
+					eventData: x,
+					start: start,
+					end: end,
+					color: 'blue lighten-1',
+				};
+			});
+>>>>>>> Stashed changes
 		},
 	}
 </script>

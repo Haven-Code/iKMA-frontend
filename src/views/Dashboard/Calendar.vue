@@ -30,50 +30,60 @@
 
 		<v-container fill-height fluid class="pa-0">
 			<v-flex fill-height>
-				<v-calendar ref="calendar" v-model="webViewCalendar.focus" @click:event="showEvent" @click:more="viewDay" :events="webViewCalendar.events" color="primary" class="ppx-border-0"></v-calendar>
+				<div class="webView hidden-sm-and-down">
+					<v-calendar ref="calendar" v-model="webViewCalendar.focus" @click:event="showEvent" @click:more="viewDay" :events="webViewCalendar.events" color="primary" class="ppx-border-0"></v-calendar>
 
-				<v-menu v-if="webViewCalendar.selectedOpen" v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
-					<v-card color="grey darken-2" style="opacity: 0.95" min-width="40vw" flat>
-						<v-toolbar dark color="primary">
-							<v-toolbar-title v-html="webViewCalendar.selectedEvent.name"></v-toolbar-title>
-							<v-spacer></v-spacer>
-						</v-toolbar>
+					<v-menu v-if="webViewCalendar.selectedOpen" v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
+						<v-card color="grey darken-2" style="opacity: 0.95" min-width="40vw" flat>
+							<v-toolbar dark color="primary">
+								<v-toolbar-title v-html="webViewCalendar.selectedEvent.name"></v-toolbar-title>
+								<v-spacer></v-spacer>
+							</v-toolbar>
 
-						<v-card-text class="pb-0 ppx-text-white">
-							<p class="pa-0 ma-0 mb-1">
-								Môn:
-								<strong>{{ webViewCalendar.selectedEvent.eventData.subjectName }} ({{ webViewCalendar.selectedEvent.eventData.subjectCode }})</strong>
-							</p>
+							<v-card-text class="pb-0 ppx-text-white">
+								<p class="pa-0 ma-0 mb-1">
+									Môn:
+									<strong>{{ webViewCalendar.selectedEvent.eventData.subjectName }} ({{ webViewCalendar.selectedEvent.eventData.subjectCode }})</strong>
+								</p>
 
-							<p class="pa-0 ma-0 mb-1">
-								Lớp:
-								<strong>{{ webViewCalendar.selectedEvent.eventData.className }}</strong>
-							</p>
+								<p class="pa-0 ma-0 mb-1">
+									Lớp:
+									<strong>{{ webViewCalendar.selectedEvent.eventData.className }}</strong>
+								</p>
 
-							<p class="pa-0 ma-0 mb-1">
-								Tiết:
-								<strong>{{ webViewCalendar.selectedEvent.eventData.lesson }}</strong>
-							</p>
+								<p class="pa-0 ma-0 mb-1">
+									Tiết:
+									<strong>{{ webViewCalendar.selectedEvent.eventData.lesson }}</strong>
+								</p>
 
-							<p class="pa-0 ma-0 mb-1">
-								Phòng Học:
-								<strong>{{ webViewCalendar.selectedEvent.eventData.room }}</strong>
-							</p>
+								<p class="pa-0 ma-0 mb-1">
+									Phòng Học:
+									<strong>{{ webViewCalendar.selectedEvent.eventData.room }}</strong>
+								</p>
 
-							<p class="pa-0 ma-0 mb-1">
-								Giáo Viên:
-								<strong>{{ webViewCalendar.selectedEvent.eventData.teacher }}</strong>
-							</p>
-						</v-card-text>
+								<p class="pa-0 ma-0 mb-1">
+									Giáo Viên:
+									<strong>{{ webViewCalendar.selectedEvent.eventData.teacher }}</strong>
+								</p>
+							</v-card-text>
 
-						<v-card-actions class="pb-2 pr-2">
-							<v-spacer></v-spacer>
-							<v-btn large text @click="webViewCalendar.selectedOpen = false" class="ppx-text-white">
-								Đóng
-							</v-btn>
-						</v-card-actions>
-					</v-card>
-				</v-menu>
+							<v-card-actions class="pb-2 pr-2">
+								<v-spacer></v-spacer>
+								<v-btn large text @click="webViewCalendar.selectedOpen = false" class="ppx-text-white">
+									Đóng
+								</v-btn>
+							</v-card-actions>
+						</v-card>
+					</v-menu>
+				</div>
+
+				<div class="mobileView hidden-md-and-up ppx-mt-2 ppx-px-2">
+					<vc-calendar is-expanded locale="vi"/>
+					
+					<div class="scheduleList ppx-border-2 ppx-h-80 ppx-rounded-lg mt-1">
+
+					</div>
+				</div>
 			</v-flex>
 		</v-container>
 	</v-main>

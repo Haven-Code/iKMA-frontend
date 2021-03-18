@@ -78,11 +78,9 @@
 				</div>
 
 				<div class="mobileView hidden-md-and-up ppx-mt-2 ppx-px-2">
-					<vc-calendar is-expanded locale="vi"/>
-					
-					<div class="scheduleList ppx-border-2 ppx-h-80 ppx-rounded-lg mt-1">
+					<vc-calendar is-expanded locale="vi" />
 
-					</div>
+					<div class="scheduleList ppx-border-2 ppx-h-80 ppx-rounded-lg mt-1"></div>
 				</div>
 			</v-flex>
 		</v-container>
@@ -103,10 +101,6 @@
 		components: {
 			Navbar,
 		},
-		metaInfo: {
-			title: 'Thời Khoá Biểu',
-			titleTemplate: ' %s | KMA Schedule',
-		},
 		data: () => ({
 			webViewCalendar: {
 				events: [],
@@ -117,6 +111,11 @@
 				type: '',
 			},
 		}),
+		metaInfo: {
+			title: 'Thời Khoá Biểu',
+			titleTemplate: ' %s | KMA Schedule',
+		},
+
 		computed: {
 			...mapState(['user']),
 		},
@@ -215,6 +214,7 @@
 				}
 				return time
 			},
+
 			convertDayTime(day, lesson) {
 				let lessonTime = this.convertLessonsToTime(lesson)
 				let time = {

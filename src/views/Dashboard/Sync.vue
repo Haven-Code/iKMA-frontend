@@ -6,7 +6,7 @@
 
 		<v-container fill-height fluid class="pa-0">
 			<v-flex fill-height>
-				<v-sheet rounded="lg" elevation="0" class="mx-3 mt-3 px-10 py-4 syncBox px-3">
+				<v-sheet rounded="lg" elevation="1" class="mx-3 mt-3 px-10 py-4 syncBox px-3">
 					<p class="text-center ppx-text-2xl ppx-font-medium">Nhập TKB vào Lịch Google / Microsoft</p>
 
 					<v-row class="mt-6">

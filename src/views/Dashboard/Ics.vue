@@ -6,7 +6,7 @@
 
 		<v-container fill-height fluid class="pa-0">
 			<v-flex fill-height>
-				<v-sheet rounded="lg" class="mx-3 mt-2 px-5 py-4 pb-7 icsBox px-3">
+				<v-sheet elevation="1" rounded="lg" class="mx-3 mt-2 px-5 py-4 pb-7 icsBox px-3">
 					<p class="text-center ppx-text-2xl ppx-font-medium">Xuất File Icalendar (.ics)</p>
 
 					<center>

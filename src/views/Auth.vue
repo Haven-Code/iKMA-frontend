@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-	<v-container fluid class="fill-height grey lighten-4">
+	<v-container fluid class="fill-height" :class="!darkMode ? 'grey lighten-4' : ''">
 		<v-row align="center" justify="center">
 			<v-col cols="11" md="7" lg="5">
 				<v-card min-height="40vh" class="py-5 px-11 ppx-rounded-xl ppx-shadow-xl">
@@ -12,11 +12,36 @@
 					</center>
 
 					<v-form ref="form" v-model="form.valid" lazy-validation class="mt-7">
-						<v-text-field :disabled="form.loading" v-on:keyup.enter="login()"  class="ppx-rounded-lg" v-model="form.studentCode" :rules="form.rules.studentCode" label="Mã Sinh Viên" outlined dense prepend-inner-icon="fas fa-user" required></v-text-field>
+						<v-text-field
+							:disabled="form.loading"
+							v-on:keyup.enter="login()"
+							class="ppx-rounded-lg"
+							v-model="form.studentCode"
+							:rules="form.rules.studentCode"
+							label="Mã Sinh Viên"
+							outlined
+							dense
+							prepend-inner-icon="fas fa-user"
+							required
+						></v-text-field>
 
-						<v-text-field :disabled="form.loading" v-on:keyup.enter="login()"  class="ppx-rounded-lg mt-n3" v-model="form.password" type="password" :rules="form.rules.password" label="Mật Khẩu" outlined dense prepend-inner-icon="fas fa-key" required></v-text-field>
+						<v-text-field
+							:disabled="form.loading"
+							v-on:keyup.enter="login()"
+							class="ppx-rounded-lg mt-n3"
+							v-model="form.password"
+							type="password"
+							:rules="form.rules.password"
+							label="Mật Khẩu"
+							outlined
+							dense
+							prepend-inner-icon="fas fa-key"
+							required
+						></v-text-field>
 
-						<a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/LostPassword.aspx" target="_blank"><p class="text-subtitle-2 mt-n4 mr-2 text-right font-weight-light">Quên Mật Khẩu ?</p></a>
+						<a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/LostPassword.aspx" target="_blank"
+							><p class="text-subtitle-2 mt-n4 mr-2 text-right font-weight-light">Quên Mật Khẩu ?</p></a
+						>
 
 						<v-btn class="ppx-rounded-lg ppx-h-11 mt-6" :loading="form.loading" color="purple" dark block @click="login">
 							<i class="fas fa-sign-in-alt mr-2 fa-lg"></i>
@@ -46,17 +71,14 @@ export default {
 			password: null,
 			loading: false,
 		},
+		darkMode: null
 	}),
 	computed: {
-		...mapState(['user']),
+		...mapState(['user', 'config']),
 	},
 	methods: {
-		toggleDarkMode() {
-			this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-			this.$store.dispatch('toggleDarkMode', this.$vuetify.theme.dark);
-		},
 		login() {
-			this.form.loading = true
+			this.form.loading = true;
 
 			if (this.$refs.form.validate()) {
 				const param = {
@@ -97,7 +119,7 @@ export default {
 						}, 1000);
 					})
 					.catch((err) => {
-						this.form.loading = false
+						this.form.loading = false;
 
 						this.$toast.error('<strong>Lỗi</strong>: ' + err);
 
@@ -105,9 +127,20 @@ export default {
 					});
 			} else {
 				this.$toast.error('Thiếu Gì Rùi!');
-				this.form.loading = false
+				this.form.loading = false;
 			}
 		},
+	},
+	created() {
+		if (this.config.darkMode === null) {
+			let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false;
+			this.$vuetify.theme.dark = theme;
+			this.$store.dispatch('toggleDarkMode', theme);
+			this.darkMode = theme
+		} else {
+			this.$vuetify.theme.dark = this.config.darkMode || false;
+			this.darkMode = this.config.darkMode || false;
+		}
 	},
 };
 </script>

@@ -52,13 +52,13 @@ export default {
 		},
 	},
 	created() {
-		// if (this.config.darkMode == null) {
-		// 	let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false;
-		// 	this.$vuetify.theme.dark = theme;
-		// 	this.$store.dispatch('toggleDarkMode', theme);
-		// } else {
-		// 	this.$vuetify.theme.dark = this.config.darkMode || false;
-		// }
+		if (this.config.darkMode === null) {
+			let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false;
+			this.$vuetify.theme.dark = theme;
+			this.$store.dispatch('toggleDarkMode', theme);
+		} else {
+			this.$vuetify.theme.dark = this.config.darkMode || false;
+		}
 	},
 };
 </script>

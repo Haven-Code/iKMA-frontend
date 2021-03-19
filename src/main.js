@@ -19,11 +19,6 @@ Vue.use(VueToast, {
 import Meta from 'vue-meta'
 Vue.use(Meta)
 
-import VCalendar from 'v-calendar'
-Vue.use(VCalendar, {
-	componentPrefix: 'vc',
-})
-
 new Vue({
 	router,
 	store,

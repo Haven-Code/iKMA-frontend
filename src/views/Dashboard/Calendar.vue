@@ -4,10 +4,36 @@
 	<v-main>
 		<navbar>
 			<template v-slot:left>
-				<div class="calendarControl">
+				<div class="calendarControl ppx-flex">
 					<v-btn outlined class="mr-4" @click="setToday">
 						Hôm Nay
 					</v-btn>
+
+					<!-- <v-select class="mr-4" v-model="webViewCalendar.type" :items="webViewCalendar.types" dense outlined hide-details label="Kiểu Lịch"></v-select> -->
+
+					<v-menu bottom right>
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn outlined v-bind="attrs" v-on="on">
+								<span>{{ webViewCalendar.typeToLabel[webViewCalendar.type] }}</span>
+
+								<v-icon right>
+									mdi-menu-down
+								</v-icon>
+							</v-btn>
+						</template>
+
+						<v-list>
+							<v-list-item @click="webViewCalendar.type = 'day'">
+								<v-list-item-title>Ngày</v-list-item-title>
+							</v-list-item>
+							<v-list-item @click="webViewCalendar.type = 'week'">
+								<v-list-item-title>Tuần</v-list-item-title>
+							</v-list-item>
+							<v-list-item @click="webViewCalendar.type = 'month'">
+								<v-list-item-title>Tháng</v-list-item-title>
+							</v-list-item>
+						</v-list>
+					</v-menu>
 
 					<v-btn fab icon small @click="prev">
 						<v-icon small>
@@ -24,7 +50,7 @@
 			</template>
 
 			<template v-slot:title v-if="$refs.calendar">
-				<span class="hidden-sm-and-down">{{ translateMonth($refs.calendar.title) }}</span>
+				<span class="hidden-sm-and-down ml-2">{{ translateMonth($refs.calendar.title) }}</span>
 			</template>
 		</navbar>
 
@@ -38,6 +64,7 @@
 					:events="webViewCalendar.events"
 					color="primary"
 					class="ppx-border-0"
+					:type="webViewCalendar.type"
 				></v-calendar>
 
 				<v-menu v-if="webViewCalendar.selectedOpen" v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
@@ -159,7 +186,12 @@ export default {
 			selectedEvent: {},
 			selectedElement: null,
 			selectedOpen: false,
-			type: '',
+			type: 'month',
+			typeToLabel: {
+				month: 'Tháng',
+				week: 'Tuần',
+				day: 'Ngày',
+			},
 		},
 		mobileViewCalendar: {
 			events: [],

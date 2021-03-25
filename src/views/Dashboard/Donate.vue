@@ -64,6 +64,26 @@
 						</v-expansion-panel>
 
 						<v-expansion-panel>
+							<v-expansion-panel-header>PlayerDuo</v-expansion-panel-header>
+
+							<v-expansion-panel-content>
+								<center>
+									<a href="https://playerduo.com/phucpx" target="_blank">https://playerduo.com/phucpx</a>
+								</center>
+							</v-expansion-panel-content>
+						</v-expansion-panel>
+
+						<v-expansion-panel>
+							<v-expansion-panel-header>Wescan Siêu Tốc</v-expansion-panel-header>
+
+							<v-expansion-panel-content>
+								<center>
+									<a href="https://app.wescan.vn/phuc.px.371" target="_blank">https://app.wescan.vn/phuc.px.371</a>
+								</center>
+							</v-expansion-panel-content>
+						</v-expansion-panel>
+
+						<v-expansion-panel>
 							<v-expansion-panel-header>Paypal</v-expansion-panel-header>
 
 							<v-expansion-panel-content>
@@ -98,6 +118,10 @@ import Navbar from '../../components/Navbar.vue';
 export default {
 	name: 'Donate',
 	components: { Navbar },
+	metaInfo: {
+		title: 'Ủng Hộ Nhà Phát Triển',
+		titleTemplate: ' %s | KMA Schedule',
+	},
 };
 </script>
 

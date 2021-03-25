@@ -25,6 +25,10 @@ import Navbar from '../../components/Navbar.vue';
 export default {
 	name: 'Scores',
 	components: { Navbar },
+	metaInfo: {
+		title: 'Bảng Điểm Sinh Viên',
+		titleTemplate: ' %s | KMA Schedule',
+	},
 };
 </script>
 

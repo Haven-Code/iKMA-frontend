@@ -6,15 +6,49 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="description" content="Tool đồng bộ TKB với Google Lịch & Outlook Calendar" />
+		<meta name="robots" content="noodp,index,follow" />
+		<meta name="revisit-after" content="1days" />
+
+		<meta property="og:url" content="https://kma.dhpgo.com" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="KMA Schedule" />
+		<meta property="og:description" content="Tool xem thời khoá biểu cho KMAer" />
+		<meta property="og:image" content="https://kma.dhpgo.com/assets/screenshot.png" />
+
+		<title>KMA Schedule</title>
+
 		<link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-		<title><%= htmlWebpackPlugin.options.title %></title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+			integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+			crossorigin="anonymous"
+		/>
+
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bluebird@3.7.2/js/browser/bluebird.min.js"></script>
+		<script src="https://alcdn.msftauth.net/lib/1.2.1/js/msal.js" integrity="sha384-9TV1245fz+BaI+VvCjMYL0YDMElLBwNS84v3mY57pXNOt6xcUYch2QLImaTahcOP" crossorigin="anonymous"></script>
+		
+		<script src="https://apis.google.com/js/api.js"></script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-176770997-1"></script>
+
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-176770997-1');
+		</script>
 	</head>
 	<body>
 		<noscript>
-			<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+			<strong>We're sorry but KMA Schedule doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 		</noscript>
 		<div id="app"></div>
 		<!-- built files will be auto injected -->

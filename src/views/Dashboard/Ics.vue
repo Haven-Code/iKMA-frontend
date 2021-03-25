@@ -10,15 +10,15 @@
 					<p class="text-center ppx-text-2xl ppx-font-medium">Xuất File Icalendar (.ics)</p>
 
 					<center>
-						<v-btn large color="primary">
+						<v-btn large color="primary" class="mt-3">
 							<v-icon class="mr-3">fas fa-file-export</v-icon>
 							Xuất File
 						</v-btn>
 
 						<br />
 
-						<v-btn large class="mt-3" color="success">
-							<v-icon class="mr-3">fas fa-file-export</v-icon>
+						<v-btn large class="mt-3" color="success" v-if="!buttonDownload.hide">
+							<v-icon class="mr-3">fas fa-file-download</v-icon>
 							Tải Xuống
 						</v-btn>
 					</center>
@@ -29,11 +29,30 @@
 </template>
 
 <script>
-import Navbar from '../../components/Navbar.vue';
-export default {
-	components: { Navbar },
-	name: 'Ics',
-};
+	import Navbar from '../../components/Navbar.vue'
+	import { mapState } from 'vuex'
+
+	export default {
+		components: { Navbar },
+		name: 'Ics',
+		data: () => ({
+			buttonExport: {
+				loading: false,
+			},
+			buttonDownload: {
+				hide: true,
+				loading: false,
+			},
+		}),
+		computed: {
+			...mapState(['user']),
+		},
+		methods: {
+			createIcs() {
+				
+			},
+		},
+	}
 </script>
 
 <style></style>

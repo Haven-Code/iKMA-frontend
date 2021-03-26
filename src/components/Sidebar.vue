@@ -39,7 +39,7 @@
 				</v-list-item-content>
 			</v-list-item>
 
-			<v-list-item link exact :to="{ name: 'Scores' }">
+			<!-- <v-list-item link exact :to="{ name: 'Scores' }">
 				<v-list-item-icon>
 					<v-icon>fas fa-graduation-cap</v-icon>
 				</v-list-item-icon>
@@ -47,7 +47,7 @@
 				<v-list-item-content>
 					<v-list-item-title class="ppx-font-normal ppx-text-lg">Bảng Điểm</v-list-item-title>
 				</v-list-item-content>
-			</v-list-item>
+			</v-list-item> -->
 
 			<v-list-item link exact :to="{ name: 'Sync' }">
 				<v-list-item-icon>
@@ -69,7 +69,7 @@
 				</v-list-item-content>
 			</v-list-item>
 
-			<v-list-item link class="hidden-md-and-up">
+			<v-list-item link class="hidden-md-and-up" exact :to="{ name: 'PWA' }">
 				<v-list-item-icon>
 					<v-icon>fas fa-mobile-alt</v-icon>
 				</v-list-item-icon>
@@ -79,13 +79,23 @@
 				</v-list-item-content>
 			</v-list-item>
 
-			<v-list-item link class="hidden-md-and-up">
+			<v-list-item link class="hidden-md-and-up" exact :to="{ name: 'Donate' }">
 				<v-list-item-icon>
 					<v-icon>fas fa-hand-holding-heart</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
 					<v-list-item-title class="ppx-font-normal ppx-text-lg">Ủng Hộ Tác Giả</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item link class="hidden-md-and-up">
+				<v-list-item-icon>
+					<v-icon>fas fa-info</v-icon>
+				</v-list-item-icon>
+
+				<v-list-item-content>
+					<v-list-item-title class="ppx-font-normal ppx-text-lg">Thông Tin</v-list-item-title>
 				</v-list-item-content>
 			</v-list-item>
 		</v-list>
@@ -129,6 +139,16 @@
 						<v-list-item-title class="ppx-font-normal ppx-text-lg">Ủng Hộ Tác Giả</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
+
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>fas fa-info</v-icon>
+					</v-list-item-icon>
+
+					<v-list-item-content>
+						<v-list-item-title class="ppx-font-normal ppx-text-lg">Thông Tin</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
 			</v-list>
 
 			<div class="copyright px-3 mb-2 text-center ppx-text-md">
@@ -145,7 +165,7 @@ import { mapState } from 'vuex';
 export default {
 	name: 'Sidebar',
 	computed: {
-		...mapState(['config','user']),
+		...mapState(['config', 'user']),
 		darkMode() {
 			return this.$vuetify.theme.dark;
 		},

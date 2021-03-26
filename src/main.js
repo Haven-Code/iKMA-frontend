@@ -18,6 +18,7 @@ Vue.use(VueToast, {
 })
 
 import Meta from 'vue-meta'
+import i18n from './i18n'
 Vue.use(Meta)
 
 const firebaseConfig = {
@@ -35,8 +36,9 @@ firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
 new Vue({
-	router,
-	store,
-	vuetify,
-	render: (h) => h(App),
+    router,
+    store,
+    vuetify,
+    i18n,
+    render: (h) => h(App)
 }).$mount('#app')

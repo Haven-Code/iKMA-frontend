@@ -143,8 +143,7 @@ export default {
 		const msalConfig = {
 			auth: {
 				clientId: process.env.VUE_APP_MS_CLIENT_ID,
-				// redirectUri: process.env.VUE_APP_MS_REDIRECT_URL,
-				redirectUri: window.location.protocol + '//' + window.location.host,
+				redirectUri: process.env.VUE_APP_MS_REDIRECT_URL,
 			},
 			cache: {
 				cacheLocation: 'sessionStorage',

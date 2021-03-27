@@ -1,3 +1,13 @@
 {
-  "message": "hello i18n !!"
+  "calendar.day": "Ngày",
+  "calendar.month": "Tháng",
+  "calendar.week": "Tuần",
+  "calendar.today": "Hôm Nay",
+  "calendar.schedule.class": "Lớp",
+  "calendar.schedule.lesson": "Tiết Học",
+  "calendar.schedule.room": "Phòng Học",
+  "calendar.schedule.subject": "Môn Học",
+  "calendar.schedule.teacher": "Giáo Viên",
+  "close": "Đóng",
+  "title.schedule": "Thời Khoá Biểu"
 }

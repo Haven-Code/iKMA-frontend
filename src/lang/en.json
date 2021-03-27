@@ -1,0 +1,13 @@
+{
+  "calendar.day": "Day",
+  "calendar.month": "Month",
+  "calendar.week": "Week",
+  "calendar.today": "Today",
+  "calendar.schedule.class": "Class",
+  "calendar.schedule.lesson": "Lesson",
+  "calendar.schedule.room": "Classroom",
+  "calendar.schedule.subject": "Subject",
+  "calendar.schedule.teacher": "Teacher",
+  "close": "Close",
+  "title.schedule": "Schedule"
+}

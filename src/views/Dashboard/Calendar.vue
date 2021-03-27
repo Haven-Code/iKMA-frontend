@@ -6,7 +6,7 @@
 			<template v-slot:left>
 				<div class="calendarControl ppx-flex">
 					<v-btn outlined class="mr-4" @click="setToday">
-						Hôm Nay
+						{{ $t('calendar.today') }}
 					</v-btn>
 
 					<!-- <v-select class="mr-4" v-model="webViewCalendar.type" :items="webViewCalendar.types" dense outlined hide-details label="Kiểu Lịch"></v-select> -->
@@ -24,13 +24,13 @@
 
 						<v-list>
 							<v-list-item @click="webViewCalendar.type = 'day'">
-								<v-list-item-title>Ngày</v-list-item-title>
+								<v-list-item-title>{{ $t('calendar.day') }}</v-list-item-title>
 							</v-list-item>
 							<v-list-item @click="webViewCalendar.type = 'week'">
-								<v-list-item-title>Tuần</v-list-item-title>
+								<v-list-item-title>{{ $t('calendar.week') }}</v-list-item-title>
 							</v-list-item>
 							<v-list-item @click="webViewCalendar.type = 'month'">
-								<v-list-item-title>Tháng</v-list-item-title>
+								<v-list-item-title>{{ $t('calendar.month') }}</v-list-item-title>
 							</v-list-item>
 						</v-list>
 					</v-menu>
@@ -76,27 +76,27 @@
 
 						<v-card-text class="pb-0 ppx-text-white">
 							<p class="pa-0 ma-0 mb-1">
-								Môn:
+								{{ $t('calendar.schedule.subject') }}:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.subjectName }} ({{ webViewCalendar.selectedEvent.eventData.subjectCode }})</strong>
 							</p>
 
 							<p class="pa-0 ma-0 mb-1">
-								Lớp:
+								{{ $t('calendar.schedule.class') }}:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.className }}</strong>
 							</p>
 
 							<p class="pa-0 ma-0 mb-1">
-								Tiết:
+								{{ $t('calendar.schedule.lesson') }}:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.lesson }}</strong>
 							</p>
 
 							<p class="pa-0 ma-0 mb-1">
-								Phòng Học:
+								{{ $t('calendar.schedule.room') }}:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.room }}</strong>
 							</p>
 
 							<p class="pa-0 ma-0 mb-1">
-								Giáo Viên:
+								{{ $t('calendar.schedule.teacher') }}:
 								<strong>{{ webViewCalendar.selectedEvent.eventData.teacher }}</strong>
 							</p>
 						</v-card-text>
@@ -104,7 +104,7 @@
 						<v-card-actions class="pb-2 pr-2">
 							<v-spacer></v-spacer>
 							<v-btn large text @click="webViewCalendar.selectedOpen = false" class="ppx-text-white">
-								Đóng
+								{{ $t('close') }}
 							</v-btn>
 						</v-card-actions>
 					</v-card>
@@ -116,7 +116,7 @@
 			<v-flex class="ppx-mt-1">
 				<vc-calendar
 					is-expanded
-					locale="vi"
+					:locale="config.lang"
 					@dayclick="showEventMobile"
 					:is-dark="$vuetify.theme.dark"
 					:attributes="mobileViewCalendar.attrs"
@@ -137,19 +137,19 @@
 										<v-list-item-title class="text-h6">{{ event.subjectName }}</v-list-item-title>
 
 										<v-list-item-subtitle class="text-subtitle-1">
-											Tiết:
+											{{ $t('calendar.schedule.lesson') }}:
 											<strong>{{ event.lesson }}</strong>
 											|
 											<strong> {{ convertLessonsToTime(event.lesson).start }} -> {{ convertLessonsToTime(event.lesson).end }} </strong>
 										</v-list-item-subtitle>
 
 										<v-list-item-subtitle class="text-subtitle-1">
-											Phòng:
+											{{ $t('calendar.schedule.room') }}:
 											<strong>{{ event.room }}</strong>
 										</v-list-item-subtitle>
 
 										<v-list-item-subtitle class="text-subtitle-1">
-											Giáo Viên:
+											{{ $t('calendar.schedule.teacher') }}:
 											<strong>{{ event.teacher }}</strong>
 										</v-list-item-subtitle>
 									</v-list-item-content>
@@ -204,12 +204,14 @@ export default {
 			],
 		},
 	}),
-	metaInfo: {
-		title: 'Thời Khoá Biểu',
-		titleTemplate: ' %s | KMA Schedule',
+	metaInfo() {
+		return {
+			title: this.$i18n.t('title.schedule'),
+			titleTemplate: ' %s | iKMA',
+		};
 	},
 	computed: {
-		...mapState(['user']),
+		...mapState(['user', 'config']),
 	},
 	methods: {
 		setToday() {

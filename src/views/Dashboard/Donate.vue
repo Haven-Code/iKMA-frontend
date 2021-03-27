@@ -120,7 +120,7 @@ export default {
 	components: { Navbar },
 	metaInfo: {
 		title: 'Ủng Hộ Nhà Phát Triển',
-		titleTemplate: ' %s | KMA Schedule',
+		titleTemplate: ' %s | iKMA',
 	},
 };
 </script>

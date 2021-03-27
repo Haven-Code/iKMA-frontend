@@ -71,10 +71,14 @@ export default {
 			password: null,
 			loading: false,
 		},
-		darkMode: null
+		darkMode: null,
 	}),
 	computed: {
 		...mapState(['user', 'config']),
+	},
+	metaInfo: {
+		title: 'Đăng Nhập',
+		titleTemplate: ' %s | iKMA',
 	},
 	methods: {
 		login() {
@@ -136,7 +140,7 @@ export default {
 			let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false;
 			this.$vuetify.theme.dark = theme;
 			this.$store.dispatch('toggleDarkMode', theme);
-			this.darkMode = theme
+			this.darkMode = theme;
 		} else {
 			this.$vuetify.theme.dark = this.config.darkMode || false;
 			this.darkMode = this.config.darkMode || false;

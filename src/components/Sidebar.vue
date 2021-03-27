@@ -11,7 +11,7 @@
 		</template>
 
 		<v-list nav class="px-4 mt-2">
-			<v-list-item link exact class="hidden-md-and-up">
+			<v-list-item link exact class="hidden-md-and-up" :to="{ name: 'Profile' }">
 				<v-list-item-avatar color="grey lighten-1">
 					<v-img
 						alt="Avatar"
@@ -89,7 +89,7 @@
 				</v-list-item-content>
 			</v-list-item>
 
-			<v-list-item link class="hidden-md-and-up">
+			<v-list-item link class="hidden-md-and-up" :to="{ name: 'About' }">
 				<v-list-item-icon>
 					<v-icon>fas fa-info</v-icon>
 				</v-list-item-icon>
@@ -102,7 +102,7 @@
 
 		<template v-slot:append>
 			<v-list nav class="px-4 hidden-sm-and-down">
-				<v-list-item link>
+				<v-list-item link exact :to="{ name: 'Profile' }">
 					<v-list-item-avatar color="grey lighten-1">
 						<v-img
 							alt="Avatar"
@@ -120,7 +120,7 @@
 
 				<v-divider class="ma-0 mb-1 mt-n1"></v-divider>
 
-				<v-list-item link :to="{ name: 'PWA' }">
+				<v-list-item link exact :to="{ name: 'PWA' }">
 					<v-list-item-icon>
 						<v-icon>fas fa-mobile-alt</v-icon>
 					</v-list-item-icon>
@@ -130,7 +130,7 @@
 					</v-list-item-content>
 				</v-list-item>
 
-				<v-list-item link :to="{ name: 'Donate' }">
+				<v-list-item link exact :to="{ name: 'Donate' }">
 					<v-list-item-icon>
 						<v-icon>fas fa-hand-holding-heart</v-icon>
 					</v-list-item-icon>
@@ -140,7 +140,7 @@
 					</v-list-item-content>
 				</v-list-item>
 
-				<v-list-item link>
+				<v-list-item link exact :to="{ name: 'About' }">
 					<v-list-item-icon>
 						<v-icon>fas fa-info</v-icon>
 					</v-list-item-icon>

@@ -1,6 +1,6 @@
 {
   "name": "ikma-frontend-vue",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -17,7 +17,6 @@
     "firebase": "^8.2.10",
     "ics": "^2.27.0",
     "postcss": "^7",
-    "pwa": "^1.9.7",
     "secure-ls": "^1.2.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "v-calendar": "^2.3.0",

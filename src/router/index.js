@@ -50,6 +50,16 @@ const routes = [
 				path: '/donate',
 				component: () => import(/* webpackChunkName: "donate" */ '../views/Dashboard/Donate.vue'),
 			},
+			{
+				name: 'About',
+				path: '/about',
+				component: () => import(/* webpackChunkName: "about" */ '../views/Dashboard/About.vue'),
+			},
+			{
+				name: 'Profile',
+				path: '/profile',
+				component: () => import(/* webpackChunkName: "profile" */ '../views/Dashboard/Profile.vue'),
+			},
 		],
 	},
 	{

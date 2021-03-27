@@ -115,7 +115,7 @@ export default {
 	name: 'Sync',
 	metaInfo: {
 		title: 'Đồng Bộ Hoá',
-		titleTemplate: ' %s | KMA Schedule',
+		titleTemplate: ' %s | iKMA',
 	},
 	data: () => ({
 		google: {

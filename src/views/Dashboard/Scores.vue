@@ -27,7 +27,7 @@ export default {
 	components: { Navbar },
 	metaInfo: {
 		title: 'Bảng Điểm Sinh Viên',
-		titleTemplate: ' %s | KMA Schedule',
+		titleTemplate: ' %s | iKMA',
 	},
 };
 </script>

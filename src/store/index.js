@@ -4,7 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import SecureLS from 'secure-ls';
-import i18n, { selectedLocale } from '@/plugins/i18n'
+import i18n, { selectedLocale } from '@/plugins/i18n';
 
 import user from './user';
 
@@ -20,9 +20,20 @@ const ls = new SecureLS({
 
 Vue.use(Vuex);
 
+const getItemFromKey = (key) => {
+	try {
+		let a = ls.get(key);
+		return a;
+	} catch (e) {
+		//console.log(e);
+		console.error("WRONG KEY ! REDIRECT TO AUTH #PPX")
+		ls.removeAll();
+	}
+};
+
 const pluginState = createPersistedState({
 	storage: {
-		getItem: (key) => ls.get(key),
+		getItem: (key) => getItemFromKey(key),
 		setItem: (key, value) => ls.set(key, value),
 		removeItem: (key) => ls.remove(key),
 	},
@@ -63,7 +74,7 @@ export default new Vuex.Store({
 			commit('SET_THEME', payload);
 		},
 		changeLanguage: ({ commit }, payload) => {
-			i18n.locale = payload
+			i18n.locale = payload;
 			commit('SET_LANG', payload);
 		},
 	},

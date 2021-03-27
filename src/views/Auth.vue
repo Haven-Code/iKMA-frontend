@@ -102,8 +102,10 @@ export default {
 						const { code, data } = res.data;
 
 						if (code == 403 || !data) {
+							this.form.loading = false;
 							return this.$toast.error('<strong>Lỗi</strong>: Sai tài khoản hoặc mật khẩu!');
 						} else if (code == 401) {
+							this.form.loading = false;
 							return this.$toast.error('<strong>Lỗi</strong>: Website trường lỗi! Thử lại sau ít phút!');
 						}
 

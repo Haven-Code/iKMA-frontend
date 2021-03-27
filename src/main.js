@@ -10,9 +10,9 @@ import i18n from './plugins/i18n';
 
 Vue.config.productionTip = false;
 
-// import wb from './registerServiceWorker';
-// Vue.prototype.$workbox = wb;
-import './registerServiceWorker'
+import wb from './registerServiceWorker';
+Vue.prototype.$workbox = wb;
+// import './registerServiceWorker'
 
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';

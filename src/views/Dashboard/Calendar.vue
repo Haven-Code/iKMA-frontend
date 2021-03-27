@@ -188,9 +188,9 @@ export default {
 			selectedOpen: false,
 			type: 'month',
 			typeToLabel: {
-				month: 'Tháng',
-				week: 'Tuần',
-				day: 'Ngày',
+				month: this.$i18n.t('calendar.month'),
+				week: this.$i18n.t('calendar.week'),
+				day: this.$i18n.t('calendar.day'),
 			},
 		},
 		mobileViewCalendar: {

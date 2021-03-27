@@ -26,7 +26,7 @@ const pluginState = createPersistedState({
 		setItem: (key, value) => ls.set(key, value),
 		removeItem: (key) => ls.remove(key),
 	},
-	paths: ['user', 'config.theme'],
+	paths: ['user', 'config'],
 });
 
 export default new Vuex.Store({

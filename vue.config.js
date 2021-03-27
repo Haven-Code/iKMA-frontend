@@ -121,7 +121,7 @@ module.exports = {
 					name: 'Ủng Hộ Tác Giả',
 					short_name: 'Ủng Hộ',
 					url: '/donate',
-					icons: [{ src: '/assets/icons/sync-solid.png', sizes: '192x192' }],
+					icons: [{ src: '/assets/icons/donate-solid.png', sizes: '192x192' }],
 				},
 			],
 			related_applications: [

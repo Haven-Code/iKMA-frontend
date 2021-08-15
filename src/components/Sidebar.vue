@@ -12,18 +12,20 @@
 
 		<v-list nav class="px-4 mt-2">
 			<v-list-item link exact class="hidden-md-and-up" :to="{ name: 'Profile' }">
-				<v-list-item-avatar color="grey lighten-1">
-					<v-img
+				<v-list-item-avatar color="white">
+					<!-- <v-img
 						alt="Avatar"
 						src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairDreads01&accessoriesType=Wayfarers&hairColor=SilverGray&facialHairType=BeardMedium&facialHairColor=BlondeGolden&clotheType=Hoodie&clotheColor=Blue03&eyeType=Happy&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"
-					></v-img>
+					></v-img> -->
+
+					<v-img alt="Avatar" src="https://i.imgur.com/dn1R8ys.png"></v-img>
 				</v-list-item-avatar>
 
 				<v-list-item-content>
 					<v-list-item-title class="ppx-text-lg ppx-font-medium">
-						Đặng Hoàng Phúc
+						{{ user.userInfo.displayName }}
 					</v-list-item-title>
-					<v-list-item-subtitle class="ppx-text-sm ppx-font-normal">AT160340</v-list-item-subtitle>
+					<v-list-item-subtitle class="ppx-text-sm ppx-font-normal">{{ user.userInfo.studentCode }}</v-list-item-subtitle>
 				</v-list-item-content>
 			</v-list-item>
 
@@ -31,7 +33,7 @@
 
 			<v-list-item link exact :to="{ name: 'Home' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-calendar-alt</v-icon>
+					<v-icon>mdi-calendar</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -51,7 +53,7 @@
 
 			<v-list-item link exact :to="{ name: 'Sync' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-sync-alt</v-icon>
+					<v-icon>mdi-sync</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -61,7 +63,7 @@
 
 			<v-list-item link exact :to="{ name: 'Ics' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-tools</v-icon>
+					<v-icon>mdi-hammer-wrench</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -71,7 +73,7 @@
 
 			<v-list-item link class="hidden-md-and-up" exact :to="{ name: 'PWA' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-mobile-alt</v-icon>
+					<v-icon>mdi-cellphone</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -81,7 +83,7 @@
 
 			<v-list-item link class="hidden-md-and-up" exact :to="{ name: 'Donate' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-hand-holding-heart</v-icon>
+					<v-icon>mdi-hand-heart</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -91,7 +93,7 @@
 
 			<v-list-item link class="hidden-md-and-up" :to="{ name: 'About' }">
 				<v-list-item-icon>
-					<v-icon>fas fa-info</v-icon>
+					<v-icon>mdi-information-variant</v-icon>
 				</v-list-item-icon>
 
 				<v-list-item-content>
@@ -103,11 +105,12 @@
 		<template v-slot:append>
 			<v-list nav class="px-4 hidden-sm-and-down">
 				<v-list-item link exact :to="{ name: 'Profile' }">
-					<v-list-item-avatar color="grey lighten-1">
-						<v-img
+					<v-list-item-avatar color="white">
+						<!-- <v-img
 							alt="Avatar"
 							src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairDreads01&accessoriesType=Wayfarers&hairColor=SilverGray&facialHairType=BeardMedium&facialHairColor=BlondeGolden&clotheType=Hoodie&clotheColor=Blue03&eyeType=Happy&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"
-						></v-img>
+						></v-img> -->
+						<v-img alt="Avatar" src="https://i.imgur.com/dn1R8ys.png"></v-img>
 					</v-list-item-avatar>
 
 					<v-list-item-content>
@@ -122,7 +125,7 @@
 
 				<v-list-item link exact :to="{ name: 'PWA' }">
 					<v-list-item-icon>
-						<v-icon>fas fa-mobile-alt</v-icon>
+						<v-icon>mdi-cellphone</v-icon>
 					</v-list-item-icon>
 
 					<v-list-item-content>
@@ -132,7 +135,7 @@
 
 				<v-list-item link exact :to="{ name: 'Donate' }">
 					<v-list-item-icon>
-						<v-icon>fas fa-hand-holding-heart</v-icon>
+						<v-icon>mdi-hand-heart</v-icon>
 					</v-list-item-icon>
 
 					<v-list-item-content>
@@ -142,7 +145,7 @@
 
 				<v-list-item link exact :to="{ name: 'About' }">
 					<v-list-item-icon>
-						<v-icon>fas fa-info</v-icon>
+						<v-icon>mdi-information-variant</v-icon>
 					</v-list-item-icon>
 
 					<v-list-item-content>

@@ -19,7 +19,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fab fa-google</v-icon>
+									<v-icon class="mr-3">mdi-google</v-icon>
 									Đăng Nhập Với Google
 								</v-btn>
 
@@ -30,7 +30,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fas fa-times</v-icon>
+									<v-icon class="mr-3">mdi-close</v-icon>
 									Ngắt Kết Nối Với Google
 								</v-btn>
 
@@ -44,7 +44,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fas fa-upload</v-icon>
+									<v-icon class="mr-3">mdi-cloud-upload</v-icon>
 									Nhập Vào Lịch Google
 								</v-btn>
 							</center>
@@ -59,7 +59,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fab fa-microsoft</v-icon>
+									<v-icon class="mr-3">mdi-microsoft</v-icon>
 									Đăng Nhập Với Microsoft
 								</v-btn>
 
@@ -70,7 +70,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fas fa-times</v-icon>
+									<v-icon class="mr-3">mdi-close</v-icon>
 									Ngắt Kết Nối Với Microsoft
 								</v-btn>
 
@@ -84,7 +84,7 @@
 									large
 									dark
 								>
-									<v-icon class="mr-3">fas fa-upload</v-icon>
+									<v-icon class="mr-3">mdi-cloud-upload</v-icon>
 									Nhập Vào Lịch Microsoft
 								</v-btn>
 							</center>
@@ -93,7 +93,7 @@
 
 					<v-divider class="mt-5 mb-3"></v-divider>
 
-					<div v-html="console" class="console ppx-bg-gray-400 mt-5 ppx-h-96 ppx-overflow-y-auto ppx-text-gray-100 px-4 py-3 ppx-rounded-lg ppx-shadow-sm mb-2"></div>
+					<div v-html="console" class="console ppx-bg-gray-800 mt-5 ppx-h-96 ppx-overflow-y-auto ppx-text-gray-100 px-4 py-3 ppx-rounded-lg ppx-shadow-sm mb-2"></div>
 				</v-sheet>
 			</v-flex>
 		</v-container>
@@ -129,7 +129,7 @@ export default {
 			loadingBtn: false,
 			account: null,
 		},
-		console: '<p>Chào bạn !</p>',
+		console: '<p>Chào bạn ! <br>Vui lòng liên kết với Google hoặc Microsoft để sử dụng tính năng này !</p>',
 	}),
 	computed: {
 		...mapState(['user']),

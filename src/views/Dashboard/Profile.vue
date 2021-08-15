@@ -10,8 +10,11 @@
 
 					<div class="ppx-text-center ppx-mb-4">
 						<v-avatar size="140" color="grey darken-1">
-							<v-img
+							<!-- <v-img
 								src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairDreads01&accessoriesType=Wayfarers&hairColor=SilverGray&facialHairType=BeardMedium&facialHairColor=BlondeGolden&clotheType=Hoodie&clotheColor=Blue03&eyeType=Happy&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"
+							></v-img> -->
+							<v-img
+								src="https://i.imgur.com/dn1R8ys.png"
 							></v-img>
 						</v-avatar>
 

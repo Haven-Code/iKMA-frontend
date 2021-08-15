@@ -14,14 +14,23 @@
 
 		<v-spacer></v-spacer>
 
-		<v-btn icon @click.stop="toggleDarkMode()" class="mr-2">
-			<v-icon v-if="!config.theme">fas fa-sun</v-icon>
-			<v-icon v-else>fas fa-moon</v-icon>
-		</v-btn>
+		<v-tooltip bottom>
+			<template v-slot:activator="{ on, attrs }">
+				<v-btn icon @click.stop="toggleDarkMode()" class="mr-2" v-bind="attrs" v-on="on">
+					<v-icon>mdi-lightbulb</v-icon>
+				</v-btn>
+			</template>
+			<span>Thay đổi nền sáng/tối</span>
+		</v-tooltip>
 
-		<v-btn icon class="mr-1" @click.stop="logout()">
-			<v-icon>fas fa-sign-out-alt</v-icon>
-		</v-btn>
+		<v-tooltip bottom>
+			<template v-slot:activator="{ on, attrs }">
+				<v-btn icon class="mr-1" @click.stop="logout()" v-bind="attrs" v-on="on">
+					<v-icon>mdi-logout-variant</v-icon>
+				</v-btn>
+			</template>
+			<span>Đăng xuất</span>
+		</v-tooltip>
 	</v-app-bar>
 </template>
 
@@ -45,9 +54,21 @@ export default {
 			this.$store.dispatch('toggleDarkMode', this.$vuetify.theme.dark);
 		},
 		logout() {
-			this.$store.dispatch('logout');
-			this.$router.push({
-				name: 'Auth',
+			this.$swal({
+				icon: 'question',
+				title: 'Bạn có muốn đăng xuất ?',
+				showConfirmButton: true,
+				showCancelButton: true,
+				reverseButtons: true,
+				confirmButtonText: 'Đồng Ý',
+				cancelButtonText: 'Đóng',
+			}).then((res) => {
+				if (res.isConfirmed) {
+					this.$store.dispatch('logout');
+					this.$router.push({
+						name: 'Auth',
+					});
+				}
 			});
 		},
 	},

@@ -21,7 +21,7 @@
 							label="Mã Sinh Viên"
 							outlined
 							dense
-							prepend-inner-icon="fas fa-user"
+							prepend-inner-icon="mdi-account"
 							required
 						></v-text-field>
 
@@ -35,7 +35,7 @@
 							label="Mật Khẩu"
 							outlined
 							dense
-							prepend-inner-icon="fas fa-key"
+							prepend-inner-icon="mdi-account-key"
 							required
 						></v-text-field>
 
@@ -44,7 +44,7 @@
 						>
 
 						<v-btn class="ppx-rounded-lg ppx-h-11 mt-6" :loading="form.loading" color="purple" dark block @click="login">
-							<i class="fas fa-sign-in-alt mr-2 fa-lg"></i>
+							<v-icon class="mr-2">mdi-login-variant</v-icon>
 							<span class="text-body-1">Đăng Nhập</span>
 						</v-btn>
 					</v-form>

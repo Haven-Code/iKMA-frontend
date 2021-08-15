@@ -5,9 +5,14 @@
 		<navbar>
 			<template v-slot:left>
 				<div class="calendarControl ppx-flex">
-					<v-btn outlined class="mr-4" @click="setToday">
-						{{ $t('calendar.today') }}
-					</v-btn>
+					<v-tooltip bottom>
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn outlined class="mr-4" @click="setToday" v-bind="attrs" v-on="on">
+								{{ $t('calendar.today') }}
+							</v-btn>
+						</template>
+						<span>Về hôm nay</span>
+					</v-tooltip>
 
 					<!-- <v-select class="mr-4" v-model="webViewCalendar.type" :items="webViewCalendar.types" dense outlined hide-details label="Kiểu Lịch"></v-select> -->
 
@@ -35,17 +40,27 @@
 						</v-list>
 					</v-menu>
 
-					<v-btn fab icon small @click="prev">
-						<v-icon small>
-							mdi-chevron-left
-						</v-icon>
-					</v-btn>
+					<v-tooltip bottom>
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn fab icon small @click="prev" class="ml-4" v-bind="attrs" v-on="on">
+								<v-icon small>
+									mdi-chevron-left
+								</v-icon>
+							</v-btn>
+						</template>
+						<span>Tháng trước</span>
+					</v-tooltip>
 
-					<v-btn fab icon small @click="next">
-						<v-icon small>
-							mdi-chevron-right
-						</v-icon>
-					</v-btn>
+					<v-tooltip bottom>
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn fab icon small @click="next" class="ml-2" v-bind="attrs" v-on="on">
+								<v-icon small>
+									mdi-chevron-right
+								</v-icon>
+							</v-btn>
+						</template>
+						<span>Tháng sau</span>
+					</v-tooltip>
 				</div>
 			</template>
 
@@ -65,6 +80,7 @@
 					color="primary"
 					class="ppx-border-0"
 					:type="webViewCalendar.type"
+					:weekdays="[1, 2, 3, 4, 5, 6, 0]"
 				></v-calendar>
 
 				<v-menu v-if="webViewCalendar.selectedOpen" v-model="webViewCalendar.selectedOpen" :activator="webViewCalendar.selectedElement" :close-on-content-click="false" offset-x>
@@ -243,6 +259,8 @@ export default {
 			nativeEvent.stopPropagation();
 		},
 		translateMonth(str) {
+			if (!str) return str;
+
 			let a = str.split(' ');
 			const dic = {
 				January: 'Tháng Một',

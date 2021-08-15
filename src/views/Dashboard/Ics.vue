@@ -11,7 +11,7 @@
 
 					<center>
 						<v-btn large color="primary" class="mt-3" :loading="buttonExport.loading" @click.stop="createIcs()">
-							<v-icon class="mr-3">fas fa-file-export</v-icon>
+							<v-icon class="mr-3">mdi-file-export</v-icon>
 							Xuất File
 						</v-btn>
 
@@ -22,7 +22,7 @@
 						</v-progress-linear>
 
 						<v-btn large class="mt-5" color="success" v-if="!buttonDownload.hide" :loading="buttonDownload.loading" @click.stop="downloadFile()">
-							<v-icon class="mr-3">fas fa-file-download</v-icon>
+							<v-icon class="mr-3">mdi-file-download</v-icon>
 							Tải Xuống
 						</v-btn>
 					</center>

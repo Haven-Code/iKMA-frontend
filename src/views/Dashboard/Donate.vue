@@ -32,7 +32,7 @@
 							</v-expansion-panel-content>
 						</v-expansion-panel>
 
-						<v-expansion-panel>
+						<!-- <v-expansion-panel>
 							<v-expansion-panel-header>Ngân Hàng NN & PTNT (Agribank)</v-expansion-panel-header>
 
 							<v-expansion-panel-content>
@@ -40,7 +40,7 @@
 								<p class="ppx-font-semibold ma-0 ppx-leading-relaxed">DANG HOANG PHUC</p>
 								<p class="ppx-font-semibold ma-0 ppx-leading-relaxed">Chi Nhánh Hà Nội I</p>
 							</v-expansion-panel-content>
-						</v-expansion-panel>
+						</v-expansion-panel> -->
 
 						<v-expansion-panel>
 							<v-expansion-panel-header>Momo</v-expansion-panel-header>

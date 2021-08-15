@@ -4,7 +4,7 @@
 	<v-main>
 		<navbar></navbar>
 
-		<v-container fill-height fluid class="pa-0">
+		<v-container fill-height fluid class="pa-0" :class="{ 'ppx-bg-gray-200': !this.$vuetify.theme.dark }">
 			<v-flex fill-height>
 				<!-- <v-sheet rounded="lg" class="mt-1 px-5 py-4 pb-7 icsBox px-3">
 					<p class="text-center ppx-text-2xl ppx-font-medium">Bảng Điểm Theo Môn</p>

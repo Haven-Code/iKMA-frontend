@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-	<v-app-bar app clipped-left elevation="0" class="ppx-border-b-2" :class="darkMode ? 'ppx-bg-custom-dark-bg' : 'ppx-bg-white ppx-border-gray-100'">
+	<v-app-bar app clipped-left elevation="0" class="ppx-border-b-2" :class="darkMode ? 'ppx-bg-custom-dark-bg' : 'ppx-bg-white ppx-border-gray-200'">
 		<v-app-bar-nav-icon @click="toggleDrawer()"></v-app-bar-nav-icon>
 
 		<v-spacer class="hidden-md-and-up"></v-spacer>

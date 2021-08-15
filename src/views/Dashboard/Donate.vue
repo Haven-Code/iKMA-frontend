@@ -4,7 +4,7 @@
 	<v-main>
 		<navbar></navbar>
 
-		<v-container fill-height fluid class="pa-0">
+		<v-container fill-height fluid class="pa-0" :class="{ 'ppx-bg-gray-200': !this.$vuetify.theme.dark }">
 			<v-flex fill-height>
 				<div class="donateTable mt-5 ppx-px-5 md:ppx-px-16 text-center">
 					<p class="text-center ppx-text-2xl mt-2 ppx-font-medium">Ủng Hộ Nhà Phát Triển</p>

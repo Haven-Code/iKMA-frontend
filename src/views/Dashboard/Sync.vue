@@ -4,7 +4,7 @@
 	<v-main>
 		<navbar></navbar>
 
-		<v-container fill-height fluid class="pa-0">
+		<v-container fill-height fluid class="pa-0" :class="{ 'ppx-bg-gray-200': !this.$vuetify.theme.dark }">
 			<v-flex fill-height>
 				<v-sheet rounded="lg" elevation="1" class="mx-3 mt-3 px-10 py-4 syncBox px-3">
 					<p class="text-center ppx-text-2xl ppx-font-medium">Nhập TKB vào Lịch Google / Microsoft</p>
@@ -93,7 +93,11 @@
 
 					<v-divider class="mt-5 mb-3"></v-divider>
 
-					<div v-html="console" class="console ppx-bg-gray-800 mt-5 ppx-h-96 ppx-overflow-y-auto ppx-text-gray-100 px-4 py-3 ppx-rounded-lg ppx-shadow-sm mb-2"></div>
+					<div
+						v-html="console"
+						:class="{ 'ppx-bg-gray-400': !this.$vuetify.theme.dark, 'ppx-bg-gray-800': this.$vuetify.theme.dark }"
+						class="console  mt-5 ppx-h-96 ppx-overflow-y-auto ppx-text-gray-100 px-4 py-3 ppx-rounded-lg ppx-shadow-sm mb-2"
+					></div>
 				</v-sheet>
 			</v-flex>
 		</v-container>
@@ -170,7 +174,7 @@ export default {
 					discoveryDocs: DISCOVERY_DOCS,
 					scope: SCOPES,
 				})
-				.then((_) => {
+				.then(() => {
 					// Listen for sign-in state changes.
 					this.google.api.auth2.getAuthInstance().isSignedIn.listen(this.google.authorized);
 				});
@@ -263,11 +267,11 @@ export default {
 				})
 				.then((res) => {
 					// console.log(res.result.id)
-					this.console += `<p class="success--text">[GOOGLE] --> Tạo Lịch Mới Thành Công ! Tên: KMA Schedule ${timeCreated} ${ID}</p>`;
+					this.console += `<p class="success--text text--lighten-3">[GOOGLE] --> Tạo Lịch Mới Thành Công ! Tên: KMA Schedule ${timeCreated} ${ID}</p>`;
 
 					const batch = this.google.api.client.newBatch();
 
-					this.console += `<p class="primary--text">[GOOGLE] --> Chuẩn bị lịch học !</p>`;
+					this.console += `<p class="primary--text text--lighten-3">[GOOGLE] --> Chuẩn bị lịch học !</p>`;
 
 					this.user.userSchedule.forEach((a) => {
 						let start = dayjs(a.day, 'DD/MM/YYYY').format('YYYY-MM-DD') + 'T' + this.convertLessonsToTime(a.lesson).start + ':00.000+07:00';
@@ -293,22 +297,22 @@ export default {
 						);
 					});
 
-					this.console += `<p class="success--text">[GOOGLE] --> Chuẩn bị xong !</p>`;
+					this.console += `<p class="success--text text--lighten-3">[GOOGLE] --> Chuẩn bị xong !</p>`;
 
-					this.console += `<p class="primary--text">[GOOGLE] --> Bắt đầu gửi !</p>`;
+					this.console += `<p class="primary--text text--lighten-3">[GOOGLE] --> Bắt đầu gửi !</p>`;
 
 					batch
 						.then(() => {
-							this.console += `<p class="success--text">[GOOGLE] --> <strong>Đồng bộ thành công ! </strong></p>`;
+							this.console += `<p class="success--text text--lighten-3">[GOOGLE] --> <strong>Đồng bộ thành công ! </strong></p>`;
 							console.log('all jobs done!!!');
 						})
 						.catch((err) => {
-							this.console += `<p class="danger--text">[GOOGLE] --> <strong>Đồng bộ thất bại ! </strong></p> <p> ${err} </p>`;
+							this.console += `<p class="danger--text text--lighten-3">[GOOGLE] --> <strong>Đồng bộ thất bại ! </strong></p> <p> ${err} </p>`;
 							throw new Error(err);
 						});
 				})
 				.catch((err) => {
-					this.console += `<p class="danger--text">[GOOGLE] --> Tạo Lịch Lỗi !</p> <p> ${err} </p>`;
+					this.console += `<p class="danger--text text--lighten-3">[GOOGLE] --> Tạo Lịch Lỗi !</p> <p> ${err} </p>`;
 					throw new Error(err);
 				});
 
@@ -319,14 +323,17 @@ export default {
 				scopes: ['openid', 'profile', 'user.read', 'calendars.readwrite'],
 			};
 			try {
-				await this.microsoft.api.loginPopup(loginRequest);
+				let res = await this.microsoft.api.loginPopup(loginRequest);
 
 				console.log('id_token acquired at: ' + new Date().toString());
 
-				if (this.microsoft.api.getAccount()) {
-					this.microsoft.account = this.microsoft.api.getAccount();
-					this.microsoft.authorized = true;
-				}
+				// if (this.microsoft.api.getAccount()) {
+				// 	this.microsoft.account = this.microsoft.api.getAccount();
+				// 	this.microsoft.authorized = true;
+				// }
+
+				this.microsoft.account = res.account;
+				this.microsoft.authorized = true;
 
 				this.$toast.success('Kết Nối Thành Công');
 			} catch (error) {
@@ -356,7 +363,7 @@ export default {
 					Name: `KMA Schedule ${timeCreated} ${ID}`,
 				});
 
-				this.console += `<p class="success--text">[MICROSOFT] --> Tạo Lịch Thành Công ! Tên: KMA Schedule ${timeCreated} ${ID} </p>`;
+				this.console += `<p class="success--text text--lighten-3">[MICROSOFT] --> Tạo Lịch Thành Công ! Tên: KMA Schedule ${timeCreated} ${ID} </p>`;
 
 				this.user.userSchedule.forEach(async (a, index) => {
 					setTimeout(async () => {
@@ -389,16 +396,16 @@ export default {
 						};
 						let eventCall = await graphClient.api(`/me/calendars/${calendar.id}/events`).post(event);
 
-						this.console += `<p class="success--text">[MICROSOFT] --> Nhập Event ${index + 1} ${a.subjectName} Thành Công !</p>`;
+						this.console += `<p class="success--text text--lighten-3">[MICROSOFT] --> Nhập Event ${index + 1} ${a.subjectName} Thành Công !</p>`;
 
 						if (index + 1 == this.user.userSchedule.length) {
-							this.console += `<p class="success--text">[MICROSOFT] --> <strong>Đồng Bộ Hoá Xong</strong></p>`;
+							this.console += `<p class="success--text text--lighten-3">[MICROSOFT] --> <strong>Đồng Bộ Hoá Xong</strong></p>`;
 							this.microsoft.loadingBtn = false;
 						}
 					}, 500 * index);
 				});
 			} catch (err) {
-				this.console += `<p class="danger--text">[MICROSOFT] --> Tạo Lịch Thất Bại Hoặc Nhập Thất Bại</p>`;
+				this.console += `<p class="danger--text text--lighten-2">[MICROSOFT] --> Tạo Lịch Thất Bại Hoặc Nhập Thất Bại</p>`;
 				this.microsoft.loadingBtn = false;
 			}
 		},

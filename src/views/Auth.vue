@@ -300,11 +300,11 @@ export default {
                         }, 1000);
                     })
                     .catch(err => {
-                        this.$toast.error("<strong>Lỗi</strong>: " + err);
-                        throw new Error(err);
+                        this.$toast.error("<strong>Lỗi</strong>: " + err.response.data.message || err.message);
+                        console.error(err);
                     })
                     .finally(() => {
-                        this.$refs.noAccountForm.reset();
+                        this.form.loading = false;
                     });
             }
         },

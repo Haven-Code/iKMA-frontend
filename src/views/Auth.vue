@@ -6,13 +6,35 @@
             <v-col cols="11" md="7" lg="5">
                 <v-card min-height="40vh" class="py-5 px-11 ppx-rounded-xl ppx-shadow-xl">
                     <v-tabs v-model="tab" center-active align-with-title>
-                        <v-tab href="#tab-1">Không sử dụng tài khoản ACTVN</v-tab>
-
-                        <v-tab href="#tab-2">Sử dụng tài khoản ACTVN</v-tab>
+                        <v-tab href="#tab-1">Mã sinh viên (BETA/NOACCOUNT)</v-tab>
+                        <v-tab href="#tab-2">Form chọn tên (BETA/NOACCOUNT)</v-tab>
+                        <v-tab href="#tab-3">Sử dụng tài khoản ACTVN</v-tab>
                     </v-tabs>
 
                     <v-tabs-items v-model="tab">
                         <v-tab-item value="tab-1">
+                            <v-form ref="noAccountStudentCodeForm" v-model="noAccountStudentCode.valid" lazy-validation class="ppx-mt-10">
+                                <v-text-field
+                                    :disabled="form.loading"
+                                    v-on:keyup.enter="getScheduleByStudentCode()"
+                                    v-model="noAccountStudentCode.studentCode"
+                                    :rules="form.rules.studentCode"
+                                    label="Mã Sinh Viên"
+                                    outlined
+                                    prepend-inner-icon="mdi-account"
+                                    required
+                                />
+
+                                <v-select v-model="noAccountStudentCode.semester" :items="noAccountSelectItems.semester" label="Năm học" :rules="form.rules.studentCode" outlined></v-select>
+
+                                <v-btn class="ppx-rounded-lg ppx-h-11 mt-3" :loading="form.loading" color="purple" dark block @click="getScheduleByStudentCode">
+                                    <v-icon class="mr-2">mdi-login-variant</v-icon>
+                                    <span class="text-body-1">Lấy thời khoá biểu </span>
+                                </v-btn>
+                            </v-form>
+                        </v-tab-item>
+
+                        <v-tab-item value="tab-2">
                             <v-form ref="noAccountForm" v-model="noAccountForm.valid" lazy-validation class="mt-5">
                                 <v-row align="center">
                                     <v-col class="d-flex" cols="12" sm="6">
@@ -55,7 +77,7 @@
                             </v-form>
                         </v-tab-item>
 
-                        <v-tab-item value="tab-2">
+                        <v-tab-item value="tab-3">
                             <p class="mt-8 text-center text-h5 font-weight-light">
                                 Đăng Nhập Bằng Tài Khoản
                                 <strong>ACTVN</strong>
@@ -118,6 +140,11 @@ export default {
             studentClass: null,
             students: null,
             semester: null,
+        },
+        noAccountStudentCode: {
+            studentCode: null,
+            semester: null,
+            valid: null,
         },
         form: {
             valid: null,
@@ -282,9 +309,40 @@ export default {
                 this.form.loading = true;
 
                 this.axiosInstance
-                    .post(`qldt/crawlStudentExcel`, {
+                    .post(`schedule/get-student-schedule`, {
                         studentHash: this.noAccountForm.students,
                         semesterHash: this.noAccountForm.semester,
+                    })
+                    .then(res => {
+                        const { data } = res.data;
+
+                        this.$store.dispatch("login", data);
+
+                        this.$toast.success("Đăng Nhập Thành Công");
+
+                        setTimeout(() => {
+                            this.$router.push({
+                                name: "Home",
+                            });
+                        }, 1000);
+                    })
+                    .catch(err => {
+                        this.$toast.error("<strong>Lỗi</strong>: " + err.response.data.message || err.message);
+                        console.error(err);
+                    })
+                    .finally(() => {
+                        this.form.loading = false;
+                    });
+            }
+        },
+        getScheduleByStudentCode() {
+            if (this.$refs.noAccountStudentCodeForm.validate()) {
+                this.form.loading = true;
+
+                this.axiosInstance
+                    .post(`schedule/get-student-schedule-by-student-code`, {
+                        studentCode: this.noAccountStudentCode.studentCode,
+                        semesterHash: this.noAccountStudentCode.semester,
                     })
                     .then(res => {
                         const { data } = res.data;

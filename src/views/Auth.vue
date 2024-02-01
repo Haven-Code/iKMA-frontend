@@ -6,14 +6,20 @@
             <v-col cols="11" md="7" lg="5">
                 <v-card min-height="40vh" class="py-5 px-11 ppx-rounded-xl ppx-shadow-xl">
                     <v-tabs v-model="tab" center-active align-with-title>
-                        <v-tab href="#tab-1">Mã sinh viên (BETA/NOACCOUNT)</v-tab>
-                        <v-tab href="#tab-2">Form chọn tên (BETA/NOACCOUNT)</v-tab>
+                        <v-tab href="#tab-1">
+                            Mã sinh viên (Beta)
+                        </v-tab>
+                        <v-tab href="#tab-2">
+                            Form chọn tên (Beta)
+                        </v-tab>
                         <v-tab href="#tab-3">Sử dụng tài khoản ACTVN</v-tab>
                     </v-tabs>
 
                     <v-tabs-items v-model="tab">
                         <v-tab-item value="tab-1">
-                            <v-form ref="noAccountStudentCodeForm" v-model="noAccountStudentCode.valid" lazy-validation class="ppx-mt-10">
+                            <v-alert type="warning" class="mt-5"> Trong trường hợp bị lỗi, vui lòng sử dụng <strong>Form chọn tên</strong> để lấy thời khoá biểu. </v-alert>
+
+                            <v-form ref="noAccountStudentCodeForm" v-model="noAccountStudentCode.valid" lazy-validation class="ppx-mt-5">
                                 <v-text-field
                                     :disabled="form.loading"
                                     v-on:keyup.enter="getScheduleByStudentCode()"

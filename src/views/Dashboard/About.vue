@@ -47,10 +47,6 @@ export default {
 				value: process.env.VUE_APP_VERSION,
 			},
 			{
-				name: 'Viết Bởi',
-				value: '<a href="https://danghoangphuc.com" target="_blank">Đặng Hoàng Phúc (AT16)</a> [<a href="https://havencode.net" target="_blank">Haven Code</a>]',
-			},
-			{
 				name: 'Năm Phát Hành',
 				value: '2021',
 			},

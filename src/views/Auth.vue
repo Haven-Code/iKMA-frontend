@@ -7,10 +7,10 @@
                 <v-card min-height="40vh" class="py-5 px-11 ppx-rounded-xl ppx-shadow-xl">
                     <v-tabs v-model="tab" center-active align-with-title>
                         <v-tab href="#tab-1">
-                            Mã sinh viên (Beta)
+                            Mã sinh viên (GA)
                         </v-tab>
                         <v-tab href="#tab-2">
-                            Form chọn tên (Beta)
+                            Form chọn tên
                         </v-tab>
                         <v-tab href="#tab-3">Sử dụng tài khoản ACTVN</v-tab>
                     </v-tabs>

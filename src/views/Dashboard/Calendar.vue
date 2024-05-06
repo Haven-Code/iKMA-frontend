@@ -187,6 +187,7 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 import 'dayjs/locale/vi';
+import {convertLessonsToTime} from "../../utils";
 dayjs.locale('vi');
 
 export default {
@@ -279,53 +280,8 @@ export default {
 			let text = dic[a[0]] + ' ' + a[1];
 			return text;
 		},
-		convertLessonsToTime(lessons) {
-			let time = {
-				start: '',
-				end: '',
-			};
-			switch (lessons) {
-				case '1,2,3':
-					time = {
-						start: '7:00',
-						end: '9:25',
-					};
-					break;
-				case '4,5,6':
-					time = {
-						start: '9:35',
-						end: '12:00',
-					};
-					break;
-				case '7,8,9':
-					time = {
-						start: '12:30',
-						end: '14:55',
-					};
-					break;
-				case '10,11,12':
-					time = {
-						start: '15:05',
-						end: '17:30',
-					};
-					break;
-				case '13,14,15,16':
-					time = {
-						start: '18:00',
-						end: '21:15',
-					};
-					break;
-				case '7,8,9,10':
-					time = {
-						start: '12:30',
-						end: '15:50',
-					};
-					break;
-			}
-			return time;
-		},
 		convertDayTime(day, lesson) {
-			let lessonTime = this.convertLessonsToTime(lesson);
+			let lessonTime = convertLessonsToTime(lesson);
 			let time = {
 				start: '',
 				end: '',
